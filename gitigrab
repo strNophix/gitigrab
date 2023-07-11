@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+if [ -z "$1" ]; then
+    echo "Usage: $(basename $0) <template>"
+    exit 0
+fi
+
+DATA_DIR="$HOME/.local/share/gitigrab"
+
+if [ ! -d "$DATA_DIR" ]; then
+    git clone https://github.com/github/gitignore.git $DATA_DIR
+fi
+
+CURRENT_DIR=$(pwd)
+
+cd $DATA_DIR
+git pull -q
+
+TEMPLATE=$(find . -type f -name "*.gitignore" | grep -iF $1 | head -n 1)
+
+if [ -t 1 ]; then 
+    cp $TEMPLATE $CURRENT_DIR/.gitignore
+else
+    cat $TEMPLATE
+fi
