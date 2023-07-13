@@ -1,6 +1,6 @@
 # gitigrab
 
-Helps you quickly add a gitignore file to your projects.
+Helps you quickly add a gitignore file to your projects. Utilizes the templates from [Github's gitigore repo](https://github.com/github/gitignore/).
 
 ## Usage
 ```sh
